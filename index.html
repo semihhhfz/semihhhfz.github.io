@@ -3,125 +3,138 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Semih'in Blogu</title>
+<title>Semih's Personal Blog</title>
+
+<!-- Google Font -->
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+
 <style>
+    /* Genel stil */
     body {
         margin: 0;
         padding: 0;
-        font-family: 'Helvetica Neue', Arial, sans-serif;
-        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        font-family: 'Montserrat', sans-serif;
+        background: linear-gradient(135deg, #f9f9f9, #e6e6ff);
         color: #333;
         display: flex;
         flex-direction: column;
         align-items: center;
-        min-height: 100vh;
-        animation: fadeIn 1.2s ease-in-out;
     }
 
-    header {
-        margin-top: 40px;
-        text-align: center;
-    }
-
-    header h1 {
-        font-size: 2.5rem;
-        font-weight: 600;
-        letter-spacing: 1px;
-        color: #444;
-        animation: slideDown 1s ease-in-out;
-    }
-
-    header p {
-        font-size: 1.1rem;
-        color: #666;
-        animation: fadeIn 2s ease-in-out;
-    }
-
+    /* Video üstte */
     .video-container {
-        margin: 40px 0;
-        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
-        border-radius: 15px;
+        margin-top: 40px;
+        border-radius: 20px;
         overflow: hidden;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.15);
         animation: float 4s ease-in-out infinite;
     }
 
-    video {
-        display: block;
+    .video-container video {
         max-width: 90vw;
         max-height: 60vh;
-        border-radius: 15px;
+        display: block;
     }
 
-    main {
-        max-width: 800px;
-        padding: 0 20px 60px 20px;
+    /* Personal Statement */
+    .personal-statement {
+        margin-top: 30px;
         text-align: center;
-    }
-
-    main h2 {
-        font-size: 1.8rem;
+        font-size: 1.3rem;
+        font-weight: 500;
         color: #444;
-        margin-top: 20px;
+        animation: fadeIn 2s ease-in-out;
     }
 
-    main p {
-        font-size: 1rem;
+    /* Projeler Bölümü */
+    .projects {
+        margin-top: 50px;
+        max-width: 800px;
+        padding: 0 20px;
+        width: 100%;
+    }
+
+    .projects h2 {
+        text-align: center;
+        font-size: 2rem;
+        margin-bottom: 30px;
         color: #555;
-        line-height: 1.6;
-        margin-top: 10px;
+    }
+
+    .project-item {
+        background: rgba(255,255,255,0.8);
+        backdrop-filter: blur(10px);
+        padding: 20px;
+        margin-bottom: 20px;
+        border-radius: 15px;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-item:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+    }
+
+    .project-item h3 {
+        margin-top: 0;
+        color: #333;
+    }
+
+    .project-item p {
+        color: #555;
+        line-height: 1.5;
     }
 
     footer {
-        text-align: center;
+        margin-top: 50px;
         padding: 20px;
-        font-size: 0.9rem;
+        text-align: center;
         color: #888;
-        background: rgba(255, 255, 255, 0.4);
-        backdrop-filter: blur(8px);
-        width: 100%;
-        position: fixed;
-        bottom: 0;
     }
 
     /* Animations */
-    @keyframes fadeIn {
-        from { opacity: 0; }
-        to { opacity: 1; }
-    }
-
-    @keyframes slideDown {
-        from { transform: translateY(-30px); opacity: 0; }
-        to { transform: translateY(0); opacity: 1; }
-    }
-
     @keyframes float {
         0% { transform: translateY(0px); }
         50% { transform: translateY(-8px); }
         100% { transform: translateY(0px); }
     }
+
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
 </style>
 </head>
+
 <body>
 
-<header>
-    <h1>🌿 Semih'in Sakin Köşesi</h1>
-    <p>Hayat, anılar ve küçük güzellikler...</p>
-</header>
-
+<!-- Video Üstte -->
 <div class="video-container">
-    <video src="semihvideo.MOV" autoplay muted loop playsinline></video>
+    <video src="assets/video/semihvideo.mov" autoplay loop muted playsinline></video>
 </div>
 
-<main>
-    <h2>Bugünün Notu</h2>
-    <p>
-        Bazen durup sadece anın tadını çıkarmak gerekir.
-        İşte bu küçük köşe, tam da bunun için var.
-    </p>
-</main>
+<!-- Personal Statement -->
+<div class="personal-statement">
+    Semih Fazlıoğlu | 16 | Tekirdağ
+</div>
+
+<!-- Projeler Bölümü -->
+<div class="projects">
+    <h2>Projelerim</h2>
+
+    <div class="project-item">
+        <h3>Matematik Fonksiyonlar Notları</h3>
+        <p>
+            Bu notlar, fonksiyonlar konusunu derinlemesine anlamamı sağladı ve öğrencilerle paylaşmak üzere hazırlandı. Detaylı açıklamalar, örnekler ve grafiklerle desteklenmiştir.
+        </p>
+    </div>
+
+    <!-- Buraya ileride yeni projelerini ekleyebilirsin -->
+</div>
 
 <footer>
-    © 2025 Semih | Tüm hakları saklıdır.
+    © 2025 Semih
 </footer>
 
 </body>
