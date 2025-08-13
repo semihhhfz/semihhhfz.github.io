@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Semih'in Blogu</title>
+<style>
+    body {
+        margin: 0;
+        padding: 0;
+        font-family: 'Helvetica Neue', Arial, sans-serif;
+        background: linear-gradient(135deg, #f5f7fa, #c3cfe2);
+        color: #333;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        min-height: 100vh;
+        animation: fadeIn 1.2s ease-in-out;
+    }
+
+    header {
+        margin-top: 40px;
+        text-align: center;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+        font-weight: 600;
+        letter-spacing: 1px;
+        color: #444;
+        animation: slideDown 1s ease-in-out;
+    }
+
+    header p {
+        font-size: 1.1rem;
+        color: #666;
+        animation: fadeIn 2s ease-in-out;
+    }
+
+    .video-container {
+        margin: 40px 0;
+        box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+        border-radius: 15px;
+        overflow: hidden;
+        animation: float 4s ease-in-out infinite;
+    }
+
+    video {
+        display: block;
+        max-width: 90vw;
+        max-height: 60vh;
+        border-radius: 15px;
+    }
+
+    main {
+        max-width: 800px;
+        padding: 0 20px 60px 20px;
+        text-align: center;
+    }
+
+    main h2 {
+        font-size: 1.8rem;
+        color: #444;
+        margin-top: 20px;
+    }
+
+    main p {
+        font-size: 1rem;
+        color: #555;
+        line-height: 1.6;
+        margin-top: 10px;
+    }
+
+    footer {
+        text-align: center;
+        padding: 20px;
+        font-size: 0.9rem;
+        color: #888;
+        background: rgba(255, 255, 255, 0.4);
+        backdrop-filter: blur(8px);
+        width: 100%;
+        position: fixed;
+        bottom: 0;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
+    }
+
+    @keyframes slideDown {
+        from { transform: translateY(-30px); opacity: 0; }
+        to { transform: translateY(0); opacity: 1; }
+    }
+
+    @keyframes float {
+        0% { transform: translateY(0px); }
+        50% { transform: translateY(-8px); }
+        100% { transform: translateY(0px); }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>🌿 Semih'in Sakin Köşesi</h1>
+    <p>Hayat, anılar ve küçük güzellikler...</p>
+</header>
+
+<div class="video-container">
+    <video src="semihvideo.MOV" autoplay muted loop playsinline></video>
+</div>
+
+<main>
+    <h2>Bugünün Notu</h2>
+    <p>
+        Bazen durup sadece anın tadını çıkarmak gerekir.
+        İşte bu küçük köşe, tam da bunun için var.
+    </p>
+</main>
+
+<footer>
+    © 2025 Semih | Tüm hakları saklıdır.
+</footer>
+
+</body>
+</html>
