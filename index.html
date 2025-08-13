@@ -58,13 +58,13 @@
         }
 
         /* Projects Grid */
-        .projects {
+        .posts {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
             gap: 20px;
         }
 
-        .project-card {
+        .post-card {
             background: white;
             padding: 15px;
             border-radius: 8px;
@@ -72,7 +72,7 @@
             transition: transform 0.2s ease;
         }
 
-        .project-card:hover {
+        .post-card:hover {
             transform: scale(1.03);
         }
     </style>
@@ -87,19 +87,28 @@
 
     <!-- Personal Statement -->
     <section>
-        <h2>About Me</h2>
-        <p>Hi, I’m Semih. Welcome to my personal blog where I share my thoughts, experiences, and projects. This space is a mix of personal reflections and creative work.</p>
+        <h2>About Me👤</h2>
+        <p>Hey, I’m Semih. This is my personal blog where i share my ideas, experiences and projects which may help you😄</p>
     </section>
 
     <!-- Projects -->
-    <section>
-        <h2>Projects</h2>
-        <div class="projects">
-            <div class="project-card">Project 1 - Description</div>
-            <div class="project-card">Project 2 - Description</div>
-            <div class="project-card">Project 3 - Description</div>
+<section>
+    <h2>Posts📬</h2>
+    <div class="posts">
+        <div class="post-card">
+            <h3>Matematik 0'dan Fonksiyonlar Notları</h3>
+            <p>Bu postun açıklaması burada olacak.</p>
         </div>
-    </section>
+        <div class="post-card">
+            <h3>Post 2 Başlık</h3>
+            <p>Kendi ellerimle 0'dan MEB'in anlatım videoları ile paralel olan notlarım aşağıdaki ekte bıraktım.</p>
+        </div>
+        <div class="post-card">
+            <h3>Post 3 Başlık</h3>
+            <p>Bu postun açıklaması burada olacak.</p>
+        </div>
+    </div>
+</section>
 
     <script>
         function scrollToContent() {
