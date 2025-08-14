@@ -70,30 +70,32 @@
   }
   .about p{margin-top:12px;color:#444;line-height:1.5}
 
-  /* Sosyal alan: esnek ve genişletilebilir */
-  .socials{
-    margin-top:16px;
-    display:flex;
-    gap:10px;
-    justify-content:center;
-    flex-wrap:wrap;
-  }
-  .socials a{
-    display:inline-flex;
-    align-items:center;
-    gap:8px;
-    padding:8px 12px;
-    border-radius:999px;
-    background:#fff;
-    border:1px solid #eee;
-    text-decoration:none;
-    color:#222;
-    font-weight:600;
-    box-shadow:0 4px 12px rgba(17,5,69,0.04);
-    transition:transform .16s, box-shadow .16s;
-  }
-  .socials a:hover{transform:translateY(-3px); box-shadow:0 10px 30px rgba(17,5,69,0.08)}
-  .socials svg{width:18px;height:18px;flex:0 0 18px}
+  .social-links {
+    display: flex;
+    gap: 20px; /* ikonlar arası boşluk */
+    justify-content: center;
+    margin-top: 20px;
+    }
+
+   .social-link {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: black; /* yazı rengi */
+  font-size: 18px;
+  font-weight: 500;
+  transition: transform 0.2s ease-in-out;
+}
+
+.social-link img {
+  width: 28px;   /* ikon boyutu */
+  height: auto;
+  margin-right: 8px; /* ikon ile yazı arasındaki boşluk */
+}
+
+.social-link:hover {
+  transform: scale(1.05);
+}
 
   /* Posts grid */
   .posts{
@@ -158,27 +160,16 @@
     <div class="about">
       <p>Hey, I’m Semih. This is my personal blog where i share my ideas, experiences and projects which may help you!😄</p>
 
-      <!-- Sosyal: SVG ikon + etiket (istediğin ikonlarla değiştirebilirsin) -->
-      <div class="socials">
-        <a href="https://instagram.com/kullaniciadiniz" target="_blank" rel="noopener" aria-label="Instagram">
-          <!-- Basit Instagram-like SVG (placeholder, kolayca değiştirilebilir) -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="#111" stroke-width="1.4"/><circle cx="12" cy="12" r="3" stroke="#111" stroke-width="1.4"/><circle cx="17.5" cy="6.5" r="0.6" fill="#111"/></svg>
-          <span>Instagram</span>
-        </a>
-
-        <a href="https://youtube.com/kanaliniz" target="_blank" rel="noopener" aria-label="YouTube">
-          <!-- Basit YouTube-like SVG -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="6" width="17" height="12" rx="3" stroke="#111" stroke-width="1.4"/><path d="M10 9.5v5l4-2.5-4-2.5z" fill="#111"/></svg>
-          <span>YouTube</span>
-        </a>
-
-        <!-- LinkedIn hazır ama yorum satırı değil, istersen aktif et -->
-        <!--
-        <a href="https://www.linkedin.com/in/kullaniciadiniz" target="_blank" rel="noopener" aria-label="LinkedIn">
-          <svg ...>...</svg><span>LinkedIn</span>
-        </a>
-        -->
-      </div>
+        <div class="social-links">
+              <a href="https://www.instagram.com/semihhhfz" target="_blank" class="social-link">
+                  <img src="instagram.PNG" alt="Instagram Icon">
+                  <span>Instagram</span>
+              </a>
+              <a href="https://www.youtube.com/" target="_blank" class="social-link">
+                <img src="youtubeicon.PNG" alt="YouTube Icon">
+                <span>YouTube</span>
+              </a>
+        </div>
     </div>
   </section>
 
