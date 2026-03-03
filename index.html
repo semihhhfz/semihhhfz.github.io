@@ -1,64 +1,44 @@
 <!DOCTYPE html>
-<html lang="tr">
+<html lang="en">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width,initial-scale=1" />
-<title>Semih's Blog</title>
+<title>Semih | Architecture Blog</title>
 <style>
-  /* Temel */
+  /* Base */
   *{box-sizing:border-box}
   html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif;background:#f9f9f9;color:#222}
-  a{color:inherit}
+  a{color:inherit; text-decoration:none;}
 
-  .intro{
-    position:relative;
-    height:100vh;
-    overflow:hidden;
-    background:#fff; /* önemli: beyaz arka plan, siyah bantlar yerine beyaz letterbox */
+  /* Header & GIF Logo */
+  header {
+    background: #fff;
+    padding: 12px 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
   }
-  .intro img{
-    position:absolute;
-    top:50%;
-    left:50%;
-    width:100%;
-    height:100%;
-    transform:translate(-50%,-50%);
-    object-fit:cover;
-    pointer-events:none;
-    display:block;
-    background:#fff;
+  
+  /* GIF'i logo boyutuna getiriyoruz */
+  .logo-gif {
+    height: 40px; /* Eğer GIF çok küçük/büyük gelirse buradaki sayıyı değiştirebilirsin */
+    width: auto;
+    display: block;
+    border-radius: 4px; /* Köşelerini hafif yumuşatmak istersen */
   }
+  
+  .nav-links { display: flex; gap: 16px; font-size: 14px; font-weight: 500;}
+  .nav-links a:hover { color: #555; }
 
-  .scroll-down{
-    position:absolute;
-    z-index:3;
-    bottom:44px;
-    left:50%;
-    transform:translateX(-50%);
-    display:inline-flex;
-    gap:.5rem;
-    align-items:center;
-    padding:10px 16px;
-    border-radius:999px;
-    background: rgba(255,255,255,0.92);
-    color: #110545;
-    font-weight:600;
-    box-shadow: 0 6px 18px rgba(17,5,69,0.12);
-    cursor:pointer;
-    user-select:none;
-    backdrop-filter: blur(4px);
-  }
-  .scroll-down small{font-size:13px; opacity:.85}
-  .scroll-down svg{width:16px;height:16px;transform:translateY(1px)}
-
-  @keyframes bounce {0%,20%,50%,80%,100%{transform:translateX(-50%) translateY(0)}40%{transform:translateX(-50%) translateY(-8px)}60%{transform:translateX(-50%) translateY(-4px)}}
-  .scroll-down{animation:bounce 1.6s infinite}
-
-
+  /* Layout */
   section{padding:44px 20px; max-width:980px; margin:0 auto}
-  h2{margin:0 0 12px 0}
+  h2{margin:0 0 16px 0; font-size: 22px;}
 
-
+  /* About Section */
   .about{
     background:#fff;
     border-radius:12px;
@@ -66,136 +46,109 @@
     box-shadow:0 6px 18px rgba(17,5,69,0.04);
     text-align: left;
   }
-  .about p{margin-top:12px;color:#444;line-height:1.5}
+  .about p{margin-top:0; color:#444; line-height:1.6; font-size: 15px;}
 
+  /* Social Links */
   .social-links {
     display: flex;
     gap: 20px;
-    justify-content: center;
     margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid #eee;
   }
-
   .social-link {
     display: flex;
     align-items: center;
-    text-decoration: none;
-    color: black;
+    color: #110545;
     font-size: 14px;
-    font-weight: 500;
-    transition: transform 0.2s ease-in-out;
+    font-weight: 600;
+    transition: transform 0.2s;
   }
+  .social-link img { width: 18px; height: auto; margin-right: 6px; }
+  .social-link:hover { transform: translateY(-2px); }
 
-    .social-link img {
-      width: 16px;
-      height: auto;
-      margin-right: 5px;
-  }
-
-    .social-link:hover {
-      transform: scale(1.05);
-  }
-
+  /* Posts */
   .posts{
-    margin-top:6px;
     display:grid;
-    gap:18px;
-    grid-template-columns:repeat(auto-fit, minmax(240px,1fr));
+    gap:20px;
+    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
   }
   .post-card{
     background:#fff;
     border-radius:12px;
-    padding:18px;
+    padding:24px;
     box-shadow:0 6px 20px rgba(17,5,69,0.04);
-    transition:transform .18s, box-shadow .18s;
+    transition:transform .2s, box-shadow .2s;
+    display: flex;
+    flex-direction: column;
   }
   .post-card:hover{transform:translateY(-6px); box-shadow:0 14px 36px rgba(17,5,69,0.08)}
-  .post-card h3{margin:0 0 8px 0}
-  .post-card p{margin:0;color:#444;line-height:1.45}
+  .post-card h3{margin:0 0 10px 0; font-size: 18px;}
+  .post-card p{margin:0 0 20px 0; color:#555; line-height:1.5; font-size: 14px; flex-grow: 1;}
 
-
+  /* Buttons */
   .btn{
     display:inline-block;
-    margin-top:6px;
-    padding:8px 12px;
+    padding:10px 16px;
     border-radius:8px;
     background:#110545;
     color:#fff;
-    text-decoration:none;
-    font-weight:700;
-    font-size:14px;
+    font-weight:600;
+    font-size:13px;
+    text-align: center;
+    transition: background 0.2s;
   }
-  .btn:hover{transform:translateY(-2px)}
-
-
-  @media (max-width:768px){
-    .intro img{
-      object-fit:contain !important;
-      width:100% !important;
-      height:100% !important;
-      transform:translate(-50%,-50%);
-      background:#fff;
-    }
-    .scroll-down{bottom:26px;padding:8px 12px;font-size:13px}
-  }
+  .btn:hover{background:#2a1b75;}
 </style>
 </head>
 <body>
 
-  <!-- Intro GIF -->
-  <div class="intro">
-    <img src="semihvideo.gif" alt="intro animation">
-    <div class="scroll-down" onclick="scrollToContent()" aria-hidden="false">
+  <header>
+    <a href="index.html" aria-label="Home">
+      <img src="semihvideo.gif" alt="Semih Logo" class="logo-gif">
+    </a>
+    <nav class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="#about">About</a>
+    </nav>
+  </header>
 
-      <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 5v14M5 12l7 7 7-7" stroke="#110545" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>
-      <small>Aşağı kaydır</small>
-    </div>
-  </div>
-
-  <!-- About Personal -->
-  <section>
-    <h2>About Me 👤</h2>
+  <section id="about">
+    <h2>Architecture Notes 🏛️</h2>
     <div class="about">
-      <p>Hey, I’m Semih. This is my personal blog where i share my ideas, experiences and projects which may help you!😄</p>
-
+      <p>Hi, I’m Semih. This is my personal architecture diary where I explore the stories of spaces, the urban fabric of modern cities, and the philosophy behind structures. We discuss not just buildings, but the impact of living spaces on human life.</p>
+        
         <div class="social-links">
               <a href="https://www.instagram.com/semihhhfz" target="_blank" class="social-link">
-                  <img src="instagramicon.PNG" alt="Instagram Icon">
+                  <img src="instagramicon.PNG" alt="Instagram">
                   <span>Instagram</span>
               </a>
-              <a href="https://youtube.com/@semihsf?si=d8_VzyI-n5J12Dql" target="_blank" class="social-link">
-                <img src="youtubeicon.PNG" alt="YouTube Icon">
+              <a href="https://youtube.com/@semihsf" target="_blank" class="social-link">
+                <img src="youtubeicon.PNG" alt="YouTube">
                 <span>YouTube</span>
               </a>
         </div>
     </div>
   </section>
 
-  <!-- Posts -->
-  <section>
-    <h2>Posts 📬</h2>
+  <section id="posts">
+    <h2>Latest Posts ✍️</h2>
     <div class="posts">
+      
       <article class="post-card">
-        <h3>Matematik 0'dan Fonksiyonlar Notları 📖</h3>
-        <p>• Kendi ellerimle 0'dan, MEB'in anlatım videolarıyla paralel olarak hazırladığım notlar burada.</p>
-        <a class="btn" href="matematikfonksiyonlari.pdf" target="_blank" rel="noopener">PDF’yi Aç</a>
+        <h3>Brutalism: The Most Honest Form of Concrete</h3>
+        <p>Is it cold and repulsive, or the most natural and sincere reflection of the material? Notes on the rise of concrete in modern architecture.</p>
+        <a class="btn" href="post1.html">Read Article →</a>
       </article>
 
       <article class="post-card">
-        <h3>Post 2 Başlık</h3>
-        <p>Yakında eklenecek içerik.</p>
+        <h3>Urban Renewal and Memory</h3>
+        <p>Does neighborhood culture disappear along with demolished buildings? Why is it important to preserve the memory of cities?</p>
+        <a class="btn" href="#">Coming Soon...</a>
       </article>
 
-      <article class="post-card">
-        <h3>Post 3 Başlık</h3>
-        <p>Yakında eklenecek içerik.</p>
-      </article>
     </div>
   </section>
 
-<script>
-  function scrollToContent(){
-    window.scrollTo({ top: window.innerHeight, behavior: 'smooth' });
-  }
-</script>
 </body>
 </html>
