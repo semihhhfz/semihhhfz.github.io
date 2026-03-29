@@ -1,244 +1,684 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>struc</title>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>struc</title>
+  <link rel="icon" type="image/png" href="struc.png">
 
-<link rel="icon" type="image/png" href="struc.png">
+  <style>
+    :root{
+      --bg: #f7f3ec;
+      --ink: #111111;
+      --muted: rgba(17,17,17,.62);
+      --line: rgba(17,17,17,.14);
+      --line-strong: rgba(17,17,17,.28);
+      --panel: rgba(255,255,255,.62);
+      --max: 1180px;
+    }
 
-<style>
-*{box-sizing:border-box}
+    *{box-sizing:border-box}
+    html,body{margin:0; min-height:100%}
+    body{
+      background: var(--bg);
+      color: var(--ink);
+      font-family: "Times New Roman", serif;
+      overflow-x:hidden;
+    }
 
-body{
-  margin:0;
-  background:#ffffff;
-  color:#000;
-  font-family:"Times New Roman", serif;
-  overflow-x:hidden;
-}
+    a{color:inherit; text-decoration:none}
+    img{display:block; max-width:100%}
 
-/* subtle grain */
-body::after{
-  content:"";
-  position:fixed;
-  inset:0;
-  pointer-events:none;
-  opacity:0.04;
-  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
-}
+    /* subtle grain */
+    body::before{
+      content:"";
+      position:fixed;
+      inset:0;
+      pointer-events:none;
+      opacity:.03;
+      background-image:
+        linear-gradient(rgba(0,0,0,.12) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0,0,0,.12) 1px, transparent 1px);
+      background-size: 64px 64px;
+      z-index:0;
+    }
 
-/* cursor glow */
-.cursor{
-  position:fixed;
-  width:300px;
-  height:300px;
-  background:radial-gradient(circle, rgba(0,0,0,0.06) 0%, transparent 70%);
-  pointer-events:none;
-  transform:translate(-50%,-50%);
-  z-index:0;
-}
+    /* HEADER */
+    header{
+      position:fixed;
+      top:0;
+      left:0;
+      width:100%;
+      z-index:20;
+      background: rgba(247,243,236,.88);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--line);
+    }
 
-/* NAV */
-header{
-  position:fixed;
-  width:100%;
-  padding:20px;
-  display:flex;
-  justify-content:space-between;
-  z-index:10;
-}
+    .header-inner{
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      min-height:74px;
+      display:flex;
+      align-items:center;
+      justify-content:space-between;
+      gap:20px;
+    }
 
-.logo-gif{height:50px}
+    .brand{
+      display:flex;
+      align-items:center;
+      gap:14px;
+      min-width:0;
+    }
 
-nav a{
-  margin-left:20px;
-  font-size:12px;
-  letter-spacing:2px;
-  text-transform:uppercase;
-  position:relative;
-}
+    .logo-gif{
+      width:52px;
+      height:52px;
+      object-fit:cover;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:#fff;
+      flex:0 0 auto;
+    }
 
-nav a::after{
-  content:"";
-  position:absolute;
-  bottom:-4px;
-  left:0;
-  width:0;
-  height:1px;
-  background:black;
-  transition:.4s;
-}
-nav a:hover::after{width:100%}
+    .brand-copy{
+      display:flex;
+      flex-direction:column;
+      line-height:1.05;
+    }
 
-/* HERO */
-.hero{
-  height:100vh;
-  display:flex;
-  flex-direction:column;
-  justify-content:center;
-  padding:0 60px;
-}
+    .brand-copy strong{
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+    }
 
-.hero h1{
-  font-size:90px;
-  line-height:0.85;
-  margin:0;
-  max-width:600px;
-  overflow:hidden;
-}
+    .brand-copy span{
+      margin-top:4px;
+      font-size:12px;
+      color:var(--muted);
+    }
 
-.hero h1 span{
-  display:block;
-  transform:translateY(100%);
-  animation:reveal 1s forwards;
-}
+    nav{
+      display:flex;
+      align-items:center;
+      gap:18px;
+    }
 
-.hero h1 span:nth-child(2){animation-delay:.2s}
+    nav a{
+      position:relative;
+      font-size:12px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:rgba(17,17,17,.78);
+      padding:8px 0;
+    }
 
-@keyframes reveal{
-  to{transform:translateY(0)}
-}
+    nav a::after{
+      content:"";
+      position:absolute;
+      left:0;
+      bottom:4px;
+      width:100%;
+      height:1px;
+      background:currentColor;
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .28s ease;
+    }
 
-.hero p{
-  margin-top:20px;
-  font-size:16px;
-  max-width:400px;
-  opacity:0;
-  animation:fade 1s .6s forwards;
-}
+    nav a:hover::after{transform:scaleX(1)}
 
-@keyframes fade{
-  to{opacity:1}
-}
+    /* MAIN */
+    main{
+      position:relative;
+      z-index:1;
+      width:min(var(--max), calc(100% - 32px));
+      margin:0 auto;
+      padding-top:94px;
+      padding-bottom:40px;
+    }
 
-/* POSTS */
-.posts{
-  padding:100px 60px;
-}
+    /* HERO */
+    .hero{
+      min-height:calc(100vh - 110px);
+      display:grid;
+      grid-template-columns: 1.15fr .85fr;
+      gap:28px;
+      align-items:center;
+      padding:26px 0 34px;
+      border-bottom:1px solid var(--line);
+    }
 
-.post{
-  margin-bottom:70px;
-  cursor:pointer;
-}
+    .hero-copy{
+      padding-right:18px;
+      animation: rise .9s ease both;
+    }
 
-.post h2{
-  font-size:30px;
-  margin:0;
-  position:relative;
-  display:inline-block;
-}
+    .eyebrow{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      margin-bottom:18px;
+      font-size:11px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
 
-.post h2::after{
-  content:"";
-  position:absolute;
-  left:0;
-  bottom:-4px;
-  width:0;
-  height:1px;
-  background:black;
-  transition:.4s;
-}
+    .eyebrow::before{
+      content:"";
+      width:40px;
+      height:1px;
+      background:var(--line-strong);
+    }
 
-.post:hover h2::after{
-  width:100%;
-}
+    h1{
+      margin:0;
+      max-width:11ch;
+      font-size:clamp(54px, 8vw, 96px);
+      line-height:.88;
+      letter-spacing:-.08em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
 
-.post:hover{
-  transform:translateX(8px);
-  transition:.3s;
-}
+    .hero-line{
+      width:min(360px, 100%);
+      height:1px;
+      background:var(--ink);
+      margin:20px 0 0;
+      transform-origin:left;
+      animation: grow 1.1s ease both;
+      animation-delay:.15s;
+    }
 
-.post p{
-  font-size:14px;
-  max-width:500px;
-  color:#555;
-  margin-top:10px;
-}
+    .hero p{
+      margin:18px 0 0;
+      max-width:56ch;
+      font-size:clamp(16px, 1.7vw, 18px);
+      line-height:1.72;
+      color:var(--muted);
+    }
 
-/* ABOUT */
-.about{
-  padding:100px 60px;
-  border-top:1px solid black;
-}
+    .hero-visual{
+      position:relative;
+      min-height:560px;
+      border:1px solid var(--line);
+      border-radius:18px;
+      overflow:hidden;
+      background:#fff;
+      box-shadow:0 20px 50px rgba(0,0,0,.05);
+      animation: rise 1s ease both;
+      animation-delay:.12s;
+    }
 
-.about p{max-width:500px}
+    .hero-visual::before{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:url("strucbackground.gif") center/cover no-repeat;
+      opacity:.82;
+      filter:contrast(1.02) saturate(.92);
+      transform:scale(1.01);
+    }
 
-.social{
-  margin-top:20px;
-}
+    .hero-visual::after{
+      content:"";
+      position:absolute;
+      inset:0;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.18), rgba(255,255,255,.58)),
+        linear-gradient(90deg, rgba(17,17,17,.12), transparent 22%, transparent 78%, rgba(17,17,17,.10));
+      mix-blend-mode: screen;
+      pointer-events:none;
+    }
 
-.social img{
-  width:18px;
-  margin-right:15px;
-  opacity:.6;
-  transition:.3s;
-}
-.social img:hover{
-  opacity:1;
-  transform:scale(1.1);
-}
+    .flash{
+      position:absolute;
+      inset:0;
+      background:rgba(255,255,255,.92);
+      opacity:0;
+      animation: flash 6.5s infinite;
+      pointer-events:none;
+      z-index:2;
+    }
 
-/* RESPONSIVE */
-@media(max-width:700px){
-  .hero h1{font-size:50px}
-  .hero{padding:0 20px}
-  .posts,.about{padding:60px 20px}
-}
-</style>
+    .hero-caption{
+      position:absolute;
+      left:18px;
+      bottom:18px;
+      z-index:3;
+      display:inline-flex;
+      align-items:center;
+      gap:10px;
+      padding:10px 12px;
+      border:1px solid rgba(17,17,17,.16);
+      border-radius:999px;
+      background:rgba(255,255,255,.72);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      font-size:11px;
+      letter-spacing:.16em;
+      text-transform:uppercase;
+    }
+
+    .hero-caption::before{
+      content:"";
+      width:7px;
+      height:7px;
+      border-radius:50%;
+      background:var(--ink);
+      animation:pulse 2.4s ease-in-out infinite;
+    }
+
+    /* SECTIONS */
+    .section{
+      padding:42px 0 0;
+    }
+
+    .section-title{
+      display:flex;
+      align-items:baseline;
+      justify-content:space-between;
+      gap:16px;
+      margin-bottom:14px;
+    }
+
+    .section-title h2{
+      margin:0;
+      font-size:12px;
+      letter-spacing:.22em;
+      text-transform:uppercase;
+      font-weight:700;
+    }
+
+    .section-title span{
+      font-size:12px;
+      color:var(--muted);
+    }
+
+    .panel{
+      border:1px solid var(--line);
+      border-radius:16px;
+      background:var(--panel);
+      box-shadow:0 18px 44px rgba(0,0,0,.04);
+      overflow:hidden;
+    }
+
+    .about{
+      padding:26px;
+      display:grid;
+      grid-template-columns: 1.35fr .65fr;
+      gap:22px;
+      align-items:start;
+    }
+
+    .about p{
+      margin:0;
+      max-width:60ch;
+      font-size:16px;
+      line-height:1.8;
+      color:rgba(17,17,17,.78);
+    }
+
+    .about-side{
+      border-left:1px solid var(--line);
+      padding-left:20px;
+    }
+
+    .about-side .mini{
+      display:block;
+      margin-bottom:12px;
+      font-size:11px;
+      letter-spacing:.18em;
+      text-transform:uppercase;
+      color:var(--muted);
+    }
+
+    .social-links{
+      display:grid;
+      gap:12px;
+    }
+
+    .social-link{
+      display:inline-flex;
+      align-items:center;
+      gap:12px;
+      padding:12px 14px;
+      border:1px solid var(--line);
+      border-radius:12px;
+      background:rgba(255,255,255,.55);
+      transition:transform .22s ease, border-color .22s ease, background .22s ease;
+    }
+
+    .social-link:hover{
+      transform:translateY(-2px);
+      border-color:var(--line-strong);
+      background:rgba(255,255,255,.9);
+    }
+
+    .social-link img{
+      width:18px;
+      height:18px;
+      object-fit:contain;
+    }
+
+    .social-link span{
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+    }
+
+    .posts{
+      display:grid;
+      gap:0;
+    }
+
+    .post-row{
+      display:grid;
+      grid-template-columns: 1fr auto;
+      gap:18px;
+      align-items:center;
+      padding:22px 24px;
+      border-top:1px solid var(--line);
+      background:rgba(255,255,255,.35);
+      transition:transform .22s ease, background .22s ease;
+    }
+
+    .post-row:first-child{border-top:0}
+
+    .post-row:hover{
+      transform:translateX(4px);
+      background:rgba(255,255,255,.72);
+    }
+
+    .post-content h3{
+      margin:0 0 8px;
+      font-size:clamp(24px, 2.4vw, 34px);
+      line-height:1;
+      letter-spacing:-.06em;
+      font-weight:700;
+    }
+
+    .post-content p{
+      margin:0;
+      max-width:60ch;
+      font-size:14px;
+      line-height:1.7;
+      color:var(--muted);
+    }
+
+    .post-action{
+      display:flex;
+      align-items:center;
+      gap:12px;
+      justify-content:flex-end;
+      flex-wrap:wrap;
+      text-align:right;
+    }
+
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      padding:7px 10px;
+      border:1px solid var(--line);
+      border-radius:999px;
+      font-size:11px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      color:rgba(17,17,17,.74);
+      background:rgba(255,255,255,.44);
+    }
+
+    .btn{
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      padding:11px 14px;
+      border-radius:999px;
+      border:1px solid var(--ink);
+      background:var(--ink);
+      color:#fff;
+      font-size:12px;
+      letter-spacing:.14em;
+      text-transform:uppercase;
+      font-weight:700;
+      transition:transform .22s ease, background .22s ease, color .22s ease;
+      white-space:nowrap;
+    }
+
+    .btn:hover{
+      transform:translateY(-1px);
+      background:#fff;
+      color:var(--ink);
+    }
+
+    .btn.secondary{
+      background:transparent;
+      color:var(--ink);
+    }
+
+    .btn.secondary:hover{
+      background:var(--ink);
+      color:#fff;
+    }
+
+    footer{
+      width:min(var(--max), calc(100% - 32px));
+      margin:20px auto 0;
+      padding:18px 0 32px;
+      display:flex;
+      justify-content:space-between;
+      gap:16px;
+      border-top:1px solid var(--line);
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:.08em;
+      text-transform:uppercase;
+    }
+
+    @keyframes rise{
+      from{opacity:0; transform:translateY(14px)}
+      to{opacity:1; transform:translateY(0)}
+    }
+
+    @keyframes grow{
+      from{transform:scaleX(0)}
+      to{transform:scaleX(1)}
+    }
+
+    @keyframes flash{
+      0%, 88%, 100%{opacity:0}
+      90%{opacity:.18}
+      92%{opacity:.52}
+      94%{opacity:.08}
+      96%{opacity:.28}
+    }
+
+    @keyframes pulse{
+      0%,100%{transform:scale(1); opacity:.75}
+      50%{transform:scale(1.18); opacity:1}
+    }
+
+    @media (max-width: 980px){
+      .hero{
+        grid-template-columns:1fr;
+        gap:18px;
+        min-height:auto;
+      }
+
+      .hero-visual{
+        min-height:420px;
+      }
+
+      .about{
+        grid-template-columns:1fr;
+      }
+
+      .about-side{
+        border-left:0;
+        border-top:1px solid var(--line);
+        padding-left:0;
+        padding-top:18px;
+      }
+    }
+
+    @media (max-width: 640px){
+      .header-inner,
+      main,
+      footer{
+        width:min(var(--max), calc(100% - 20px));
+      }
+
+      .header-inner{
+        min-height:84px;
+        flex-direction:column;
+        align-items:flex-start;
+        justify-content:center;
+        padding:12px 0;
+      }
+
+      nav{
+        gap:14px;
+      }
+
+      .logo-gif{
+        width:48px;
+        height:48px;
+      }
+
+      main{
+        padding-top:100px;
+      }
+
+      .hero{
+        padding-top:10px;
+      }
+
+      .post-row{
+        grid-template-columns:1fr;
+      }
+
+      .post-action{
+        justify-content:flex-start;
+        text-align:left;
+      }
+
+      footer{
+        flex-direction:column;
+        gap:10px;
+      }
+    }
+  </style>
 </head>
-
 <body>
 
-<div class="cursor" id="cursor"></div>
+  <header>
+    <div class="header-inner">
+      <a href="index.html" class="brand" aria-label="Home">
+        <img src="struc.gif" alt="struc logo" class="logo-gif">
+        <div class="brand-copy">
+          <strong>struc</strong>
+          <span>Architecture notes / strange forms</span>
+        </div>
+      </a>
 
-<header>
-  <img src="struc.gif" class="logo-gif">
-  <nav>
-    <a href="#">home</a>
-    <a href="#about">about</a>
-  </nav>
-</header>
+      <nav aria-label="Main navigation">
+        <a href="index.html">Home</a>
+        <a href="#about">About</a>
+        <a href="#posts">Posts</a>
+      </nav>
+    </div>
+  </header>
 
-<section class="hero">
-  <h1>
-    <span>structure</span>
-    <span>and silence</span>
-  </h1>
-  <p>a simple blog about architecture, cities and strange buildings</p>
-</section>
+  <main>
+    <section class="hero">
+      <div class="hero-copy">
+        <div class="eyebrow">Architecture blog</div>
+        <h1>Structure and silence.</h1>
+        <div class="hero-line"></div>
+        <p>
+          A minimal architecture blog about concrete, cities, and strange buildings.
+          Quiet layout, sharp type, and a visual rhythm that feels more like a scene than a template.
+        </p>
+      </div>
 
-<section class="posts">
+      <div class="hero-visual">
+        <div class="flash"></div>
+        <div class="hero-caption">moving structure / visual note</div>
+      </div>
+    </section>
 
-  <div class="post">
-    <h2>Brutalism: the most honest form of concrete</h2>
-    <p>is it cold or just real? a short look into concrete architecture.</p>
-  </div>
+    <section id="about" class="section">
+      <div class="section-title">
+        <h2>About</h2>
+        <span>Who this is for</span>
+      </div>
 
-  <div class="post">
-    <h2>urban renewal and memory</h2>
-    <p>what happens when cities forget their past?</p>
-  </div>
+      <div class="panel about">
+        <div>
+          <p>
+            Hi, I’m Semih. I use this blog to share basic stuff about architecture that I find interesting.
+            No complicated language, just simple explanations and thoughts.
+          </p>
+        </div>
 
-</section>
+        <div class="about-side">
+          <span class="mini">Find me</span>
+          <div class="social-links">
+            <a href="https://www.instagram.com/semihhhfz" target="_blank" rel="noopener noreferrer" class="social-link">
+              <img src="instagramicon.PNG" alt="Instagram">
+              <span>Instagram</span>
+            </a>
 
-<section class="about" id="about">
-  <p>hi, i'm semih. i write about architecture in a simple way.</p>
+            <a href="https://youtube.com/@semihsf" target="_blank" rel="noopener noreferrer" class="social-link">
+              <img src="youtubeicon.PNG" alt="YouTube">
+              <span>YouTube</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
 
-  <div class="social">
-    <a href="#"><img src="instagramicon.PNG"></a>
-    <a href="#"><img src="youtubeicon.PNG"></a>
-  </div>
-</section>
+    <section id="posts" class="section">
+      <div class="section-title">
+        <h2>Latest Posts</h2>
+        <span>Small list, no clutter</span>
+      </div>
 
-<script>
-const cursor = document.getElementById("cursor");
+      <div class="panel posts">
+        <article class="post-row">
+          <div class="post-content">
+            <h3>Brutalism: the most honest form of concrete</h3>
+            <p>Is it cold or just real? A short look into concrete architecture.</p>
+          </div>
+          <div class="post-action">
+            <span class="chip">3 min read</span>
+            <a class="btn" href="post1.html">Read</a>
+          </div>
+        </article>
 
-document.addEventListener("mousemove", e => {
-  cursor.style.left = e.clientX + "px";
-  cursor.style.top = e.clientY + "px";
-});
-</script>
+        <article class="post-row">
+          <div class="post-content">
+            <h3>Urban renewal and memory</h3>
+            <p>What happens when cities forget their past?</p>
+          </div>
+          <div class="post-action">
+            <span class="chip">Coming soon</span>
+            <a class="btn secondary" href="#">Preview</a>
+          </div>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>© 2026 struc</span>
+    <span>Minimal / brutal / futuristic</span>
+  </footer>
 
 </body>
 </html>
