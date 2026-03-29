@@ -2,154 +2,243 @@
 <html lang="en">
 <head>
 <meta charset="utf-8" />
-<link rel="icon" type="image/png" href="struc.png">
-<meta name="viewport" content="width=device-width,initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>struc</title>
+
+<link rel="icon" type="image/png" href="struc.png">
+
 <style>
-  /* Base */
-  *{box-sizing:border-box}
-  html,body{height:100%;margin:0;font-family:Arial,Helvetica,sans-serif;background:#f9f9f9;color:#222}
-  a{color:inherit; text-decoration:none;}
+*{box-sizing:border-box}
 
-  header {
-    background: #fff;
-    padding: 12px 20px;
-    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-    position: sticky;
-    top: 0;
-    z-index: 100;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-
-  .logo-gif {
-    height: 60px; 
-    width: auto;
-    display: block;
-    border-radius: 4px;
-  }
-  
-  .nav-links { display: flex; gap: 16px; font-size: 14px; font-weight: 500;}
-  .nav-links a:hover { color: #555; }
-
-  
-  section{padding:44px 20px; max-width:980px; margin:0 auto}
-  h2{margin:0 0 16px 0; font-size: 22px;}
-
-  
-  .about{
-    background:#fff;
-    border-radius:12px;
-    padding:24px;
-    box-shadow:0 6px 18px rgba(17,5,69,0.04);
-    text-align: left;
-  }
-  .about p{margin-top:0; color:#444; line-height:1.6; font-size: 15px;}
-
- .social-links {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 28px;
-  margin-top: 25px;
-  padding-top: 18px;
-  border-top: 1px solid #eee;
+body{
+  margin:0;
+  background:#ffffff;
+  color:#000;
+  font-family:"Times New Roman", serif;
+  overflow-x:hidden;
 }
 
-.social-link img {
-  width: 22px;   
-  height: auto;
-  transition: transform 0.2s ease, opacity 0.2s ease;
+/* subtle grain */
+body::after{
+  content:"";
+  position:fixed;
+  inset:0;
+  pointer-events:none;
+  opacity:0.04;
+  background-image:url("https://grainy-gradients.vercel.app/noise.svg");
 }
 
-.social-link img:hover {
-  transform: scale(1.15);
-  opacity: 0.7;
+/* cursor glow */
+.cursor{
+  position:fixed;
+  width:300px;
+  height:300px;
+  background:radial-gradient(circle, rgba(0,0,0,0.06) 0%, transparent 70%);
+  pointer-events:none;
+  transform:translate(-50%,-50%);
+  z-index:0;
 }
 
-  
-  .posts{
-    display:grid;
-    gap:20px;
-    grid-template-columns:repeat(auto-fit, minmax(280px,1fr));
-  }
-  .post-card{
-    background:#fff;
-    border-radius:12px;
-    padding:24px;
-    box-shadow:0 6px 20px rgba(17,5,69,0.04);
-    transition:transform .2s, box-shadow .2s;
-    display: flex;
-    flex-direction: column;
-  }
-  .post-card:hover{transform:translateY(-6px); box-shadow:0 14px 36px rgba(17,5,69,0.08)}
-  .post-card h3{margin:0 0 10px 0; font-size: 18px;}
-  .post-card p{margin:0 0 20px 0; color:#555; line-height:1.5; font-size: 14px; flex-grow: 1;}
+/* NAV */
+header{
+  position:fixed;
+  width:100%;
+  padding:20px;
+  display:flex;
+  justify-content:space-between;
+  z-index:10;
+}
 
-  
-  .btn{
-    display:inline-block;
-    padding:10px 16px;
-    border-radius:8px;
-    background:#110545;
-    color:#fff;
-    font-weight:600;
-    font-size:13px;
-    text-align: center;
-    transition: background 0.2s;
-  }
-  .btn:hover{background:#2a1b75;}
+.logo-gif{height:50px}
+
+nav a{
+  margin-left:20px;
+  font-size:12px;
+  letter-spacing:2px;
+  text-transform:uppercase;
+  position:relative;
+}
+
+nav a::after{
+  content:"";
+  position:absolute;
+  bottom:-4px;
+  left:0;
+  width:0;
+  height:1px;
+  background:black;
+  transition:.4s;
+}
+nav a:hover::after{width:100%}
+
+/* HERO */
+.hero{
+  height:100vh;
+  display:flex;
+  flex-direction:column;
+  justify-content:center;
+  padding:0 60px;
+}
+
+.hero h1{
+  font-size:90px;
+  line-height:0.85;
+  margin:0;
+  max-width:600px;
+  overflow:hidden;
+}
+
+.hero h1 span{
+  display:block;
+  transform:translateY(100%);
+  animation:reveal 1s forwards;
+}
+
+.hero h1 span:nth-child(2){animation-delay:.2s}
+
+@keyframes reveal{
+  to{transform:translateY(0)}
+}
+
+.hero p{
+  margin-top:20px;
+  font-size:16px;
+  max-width:400px;
+  opacity:0;
+  animation:fade 1s .6s forwards;
+}
+
+@keyframes fade{
+  to{opacity:1}
+}
+
+/* POSTS */
+.posts{
+  padding:100px 60px;
+}
+
+.post{
+  margin-bottom:70px;
+  cursor:pointer;
+}
+
+.post h2{
+  font-size:30px;
+  margin:0;
+  position:relative;
+  display:inline-block;
+}
+
+.post h2::after{
+  content:"";
+  position:absolute;
+  left:0;
+  bottom:-4px;
+  width:0;
+  height:1px;
+  background:black;
+  transition:.4s;
+}
+
+.post:hover h2::after{
+  width:100%;
+}
+
+.post:hover{
+  transform:translateX(8px);
+  transition:.3s;
+}
+
+.post p{
+  font-size:14px;
+  max-width:500px;
+  color:#555;
+  margin-top:10px;
+}
+
+/* ABOUT */
+.about{
+  padding:100px 60px;
+  border-top:1px solid black;
+}
+
+.about p{max-width:500px}
+
+.social{
+  margin-top:20px;
+}
+
+.social img{
+  width:18px;
+  margin-right:15px;
+  opacity:.6;
+  transition:.3s;
+}
+.social img:hover{
+  opacity:1;
+  transform:scale(1.1);
+}
+
+/* RESPONSIVE */
+@media(max-width:700px){
+  .hero h1{font-size:50px}
+  .hero{padding:0 20px}
+  .posts,.about{padding:60px 20px}
+}
 </style>
 </head>
+
 <body>
 
-  <header>
-    <a href="index.html" aria-label="Home">
-      <img src="struc.gif" alt="struc" class="logo-gif">
-    </a>
-    <nav class="nav-links">
-      <a href="index.html">Home</a>
-      <a href="#about">About</a>
-    </nav>
-  </header>
+<div class="cursor" id="cursor"></div>
 
-  <section id="about">
-    <h2>About</h2>
-    <div class="about">
-      <p>Hi, I’m Semih. I use this blog to share basic stuff about architecture that I find interesting. No complicated language, just simple explanations and thoughts. </p>
-        
-        <div class="social-links">
-            <a href="https://www.instagram.com/semihhhfz" target="_blank" class="social-link">
-              <img src="instagramicon.PNG" alt="Instagram">
-            </a>
+<header>
+  <img src="struc.gif" class="logo-gif">
+  <nav>
+    <a href="#">home</a>
+    <a href="#about">about</a>
+  </nav>
+</header>
 
-            <a href="https://youtube.com/@semihsf" target="_blank" class="social-link">
-              <img src="youtubeicon.PNG" alt="YouTube">
-            </a>
-        </div>
-    </div>
-  </section>
+<section class="hero">
+  <h1>
+    <span>structure</span>
+    <span>and silence</span>
+  </h1>
+  <p>a simple blog about architecture, cities and strange buildings</p>
+</section>
 
-  <section id="posts">
-    <h2>Latest Posts ✍️</h2>
-    <div class="posts">
-      
-      <article class="post-card">
-        <h3>Brutalism: The Most Honest Form of Concrete</h3>
-        <p>Is it cold and repulsive, or the most natural and sincere reflection of the material? Notes on the rise of concrete in modern architecture.</p>
-        <a class="btn" href="post1.html">Read Article →</a>
-      </article>
+<section class="posts">
 
-      <article class="post-card">
-        <h3>Urban Renewal and Memory</h3>
-        <p>Does neighborhood culture disappear along with demolished buildings? Why is it important to preserve the memory of cities?</p>
-        <a class="btn" href="#">Coming Soon...</a>
-      </article>
+  <div class="post">
+    <h2>Brutalism: the most honest form of concrete</h2>
+    <p>is it cold or just real? a short look into concrete architecture.</p>
+  </div>
 
-    </div>
-  </section>
+  <div class="post">
+    <h2>urban renewal and memory</h2>
+    <p>what happens when cities forget their past?</p>
+  </div>
+
+</section>
+
+<section class="about" id="about">
+  <p>hi, i'm semih. i write about architecture in a simple way.</p>
+
+  <div class="social">
+    <a href="#"><img src="instagramicon.PNG"></a>
+    <a href="#"><img src="youtubeicon.PNG"></a>
+  </div>
+</section>
+
+<script>
+const cursor = document.getElementById("cursor");
+
+document.addEventListener("mousemove", e => {
+  cursor.style.left = e.clientX + "px";
+  cursor.style.top = e.clientY + "px";
+});
+</script>
 
 </body>
 </html>
