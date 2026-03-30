@@ -12,35 +12,38 @@
 
 body{
   margin:0;
-  background:#ffffff;
+  background:#fff;
   color:#000;
   font-family:"Times New Roman", serif;
   overflow-x:hidden;
 }
 
-/* GIF TEXTURE (çok hafif) */
-body::before{
-  content:"";
+/* ===== BACKGROUND STRUCTURE ===== */
+.bg-structure{
   position:fixed;
-  inset:0;
-  background-image:url("strucbackground.gif");
-  background-size:300px;
-  opacity:0.1;
+  top:0;
+  right:0;
+  width:35%;
+  height:100vh;
+  background:url("strucbackground.gif") center/cover no-repeat;
+  opacity:0.18;
+  mix-blend-mode:multiply;
   pointer-events:none;
+  z-index:0;
 }
 
-/* CURSOR */
+/* ===== CURSOR ===== */
 .cursor{
   position:fixed;
   width:260px;
   height:260px;
-  background:radial-gradient(circle, rgba(0,0,0,0.06) 0%, transparent 70%);
+  background:radial-gradient(circle, rgba(0,0,0,0.05) 0%, transparent 70%);
   pointer-events:none;
   transform:translate(-50%,-50%);
-  z-index:0;
+  z-index:1;
 }
 
-/* HEADER (cursor etkisini keser) */
+/* ===== HEADER ===== */
 header{
   position:fixed;
   top:0;
@@ -50,8 +53,8 @@ header{
   display:flex;
   justify-content:space-between;
   align-items:center;
-  z-index:10;
   background:#fff;
+  z-index:10;
 }
 
 .logo-gif{
@@ -74,20 +77,22 @@ nav a::after{
   width:0;
   height:1px;
   background:black;
-  transition:.4s;
+  transition:.3s;
 }
 
 nav a:hover::after{
   width:100%;
 }
 
-/* HERO */
+/* ===== HERO ===== */
 .hero{
   height:100vh;
   display:flex;
   flex-direction:column;
   justify-content:center;
   padding:0 60px;
+  position:relative;
+  z-index:2;
 }
 
 .hero h1{
@@ -105,9 +110,11 @@ nav a:hover::after{
   color:#444;
 }
 
-/* POSTS */
+/* ===== POSTS ===== */
 .posts{
   padding:100px 60px;
+  position:relative;
+  z-index:2;
 }
 
 .post{
@@ -130,7 +137,7 @@ nav a:hover::after{
   width:0;
   height:1px;
   background:black;
-  transition:.4s;
+  transition:.3s;
 }
 
 .post:hover h2::after{
@@ -148,23 +155,40 @@ nav a:hover::after{
   margin-top:10px;
 }
 
-/* ABOUT */
+/* ===== ABOUT ===== */
 .about{
   padding:100px 60px;
+  position:relative;
+  z-index:2;
+}
+
+.about-box{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:40px;
   border-top:1px solid black;
+  padding-top:40px;
 }
 
-.about p{
-  max-width:500px;
+.about-text{
+  font-size:15px;
+  line-height:1.6;
+  max-width:400px;
 }
 
+.about-right{
+  display:flex;
+  align-items:flex-end;
+}
+
+/* ===== SOCIAL ===== */
 .social{
-  margin-top:20px;
+  display:flex;
+  gap:20px;
 }
 
 .social img{
   width:18px;
-  margin-right:15px;
   opacity:.6;
   transition:.3s;
 }
@@ -174,17 +198,20 @@ nav a:hover::after{
   transform:scale(1.1);
 }
 
-/* RESPONSIVE */
+/* ===== RESPONSIVE ===== */
 @media(max-width:700px){
   .hero h1{font-size:50px}
   .hero{padding:0 20px}
   .posts,.about{padding:60px 20px}
+  .bg-structure{display:none}
+  .about-box{grid-template-columns:1fr}
 }
 </style>
 </head>
 
 <body>
 
+<div class="bg-structure"></div>
 <div class="cursor" id="cursor"></div>
 
 <header>
@@ -215,12 +242,22 @@ nav a:hover::after{
 </section>
 
 <section class="about" id="about">
-  <p>hi, i'm semih. i write about architecture in a simple way.</p>
 
-  <div class="social">
-    <a href="https://instagram.com/semihhhfz"><img src="instagramicon.PNG"></a>
-    <a href="https://youtube.com/@semihsf"><img src="youtubeicon.PNG"></a>
+  <div class="about-box">
+
+    <div class="about-text">
+      hi, i'm semih. i write about architecture in a simple way.
+    </div>
+
+    <div class="about-right">
+      <div class="social">
+        <a href="https://instagram.com/semihhhfz"><img src="instagramicon.PNG"></a>
+        <a href="https://youtube.com/@semihsf"><img src="youtubeicon.PNG"></a>
+      </div>
+    </div>
+
   </div>
+
 </section>
 
 <script>
