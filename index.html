@@ -4,12 +4,11 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>struc</title>
+
 <link rel="icon" type="image/png" href="struc.png">
 
 <style>
-  * {
-    box-sizing: border-box;
-  }
+  * { box-sizing: border-box; }
 
   html, body {
     margin: 0;
@@ -32,6 +31,34 @@
   img {
     display: block;
     max-width: 100%;
+  }
+
+  /* Full-page GIF background */
+  body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background-image: url("strucbackground.gif");
+    background-repeat: repeat;
+    background-size: 300px auto;
+    background-position: top left;
+    opacity: 0.12;
+    mix-blend-mode: multiply;
+    filter: contrast(1.08) brightness(1.03);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  /* Soft white wash so the page stays clean */
+  body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+    background:
+      linear-gradient(to bottom, rgba(255,255,255,0.72), rgba(255,255,255,0.84)),
+      radial-gradient(circle at 50% 20%, rgba(255,255,255,0.12), transparent 55%);
+    pointer-events: none;
+    z-index: 0;
   }
 
   .cursor {
@@ -100,18 +127,15 @@
     z-index: 2;
   }
 
-  /* HERO */
+  /* Hero */
   .hero {
     min-height: 100vh;
-    display: grid;
-    grid-template-columns: 1.05fr 0.95fr;
-    gap: 30px;
-    align-items: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
     padding: 120px 0 60px;
-  }
-
-  .hero-copy {
-    max-width: 640px;
+    position: relative;
+    z-index: 2;
   }
 
   .hero h1 {
@@ -144,56 +168,7 @@
     animation-delay: 0.08s;
   }
 
-  .hero-visual {
-    position: relative;
-    min-height: 560px;
-    overflow: hidden;
-    animation: rise 0.85s ease both;
-    animation-delay: 0.1s;
-  }
-
-  .hero-visual::before {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background-image: url("strucbackground.gif");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    transform: scale(1.02);
-    opacity: 1;
-    filter: contrast(1.04) brightness(1.02);
-  }
-
-  .hero-visual::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    background:
-      linear-gradient(
-        90deg,
-        rgba(255,255,255,0.96) 0%,
-        rgba(255,255,255,0.72) 22%,
-        rgba(255,255,255,0.28) 50%,
-        rgba(255,255,255,0.56) 78%,
-        rgba(255,255,255,0.92) 100%
-      ),
-      linear-gradient(
-        180deg,
-        rgba(255,255,255,0.08),
-        rgba(255,255,255,0.18)
-      );
-    pointer-events: none;
-  }
-
-  .hero-visual .edge {
-    position: absolute;
-    inset: 18px;
-    border: 1px solid rgba(0,0,0,0.12);
-    pointer-events: none;
-  }
-
-  /* POSTS */
+  /* Posts */
   .posts {
     padding: 20px 0 80px;
     position: relative;
@@ -245,7 +220,7 @@
     padding-bottom: 2px;
   }
 
-  /* ABOUT */
+  /* About */
   .about {
     padding: 80px 0;
     position: relative;
@@ -255,9 +230,15 @@
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1.15fr 0.85fr;
-    gap: 32px;
+    grid-template-columns: 1.25fr 0.75fr;
+    gap: 28px;
     align-items: start;
+  }
+
+  .about-left {
+    display: grid;
+    gap: 18px;
+    align-content: start;
   }
 
   .about-left p {
@@ -266,71 +247,6 @@
     font-size: 15px;
     line-height: 1.7;
     color: #111;
-  }
-
-  .about-right {
-    display: grid;
-    gap: 16px;
-    align-content: start;
-  }
-
-  .newsletter-box {
-    border: 1px solid #000;
-    padding: 18px;
-    background: #fff;
-  }
-
-  .newsletter-box .label {
-    font-size: 12px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-  }
-
-  .newsletter-box p {
-    margin: 0 0 14px;
-    color: #444;
-    font-size: 14px;
-    line-height: 1.6;
-  }
-
-  .newsletter-form {
-    display: flex;
-    gap: 10px;
-  }
-
-  .newsletter-form input {
-    flex: 1;
-    border: 1px solid #000;
-    padding: 12px;
-    font: inherit;
-    font-size: 14px;
-    outline: none;
-    background: #fff;
-    min-width: 0;
-  }
-
-  .newsletter-form input:focus {
-    box-shadow: inset 0 0 0 1px #000;
-  }
-
-  .newsletter-form button {
-    border: 1px solid #000;
-    background: #000;
-    color: #fff;
-    padding: 12px 14px;
-    font: inherit;
-    font-size: 13px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
-    cursor: pointer;
-    transition: background 0.2s ease, color 0.2s ease;
-    white-space: nowrap;
-  }
-
-  .newsletter-form button:hover {
-    background: #fff;
-    color: #000;
   }
 
   .social {
@@ -355,6 +271,65 @@
   .social img:hover {
     opacity: 1;
     transform: scale(1.08);
+  }
+
+  .newsletter-box {
+    border: 1px solid #000;
+    padding: 18px;
+    background: rgba(255,255,255,0.92);
+  }
+
+  .newsletter-box .label {
+    font-size: 12px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 10px;
+  }
+
+  .newsletter-box p {
+    margin: 0 0 14px;
+    color: #444;
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  .newsletter-form {
+    display: flex;
+    gap: 10px;
+  }
+
+  .newsletter-form input {
+    flex: 1;
+    min-width: 0;
+    border: 1px solid #000;
+    padding: 12px;
+    font: inherit;
+    font-size: 14px;
+    outline: none;
+    background: #fff;
+  }
+
+  .newsletter-form input:focus {
+    box-shadow: inset 0 0 0 1px #000;
+  }
+
+  .newsletter-form button {
+    border: 1px solid #000;
+    background: #000;
+    color: #fff;
+    padding: 12px 14px;
+    font: inherit;
+    font-size: 13px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transition: background 0.2s ease, color 0.2s ease;
+    white-space: nowrap;
+  }
+
+  .newsletter-form button:hover {
+    background: #fff;
+    color: #000;
   }
 
   footer {
@@ -389,12 +364,7 @@
 
   @media (max-width: 900px) {
     .hero {
-      grid-template-columns: 1fr;
       padding-top: 140px;
-    }
-
-    .hero-visual {
-      min-height: 420px;
     }
 
     .about-grid {
@@ -468,15 +438,9 @@
 
   <main class="wrap">
     <section class="hero">
-      <div class="hero-copy">
-        <h1>structure<br>and silence</h1>
-        <div class="hero-line"></div>
-        <p>a simple blog about architecture and strange buildings</p>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <div class="edge"></div>
-      </div>
+      <h1>structure<br>and silence</h1>
+      <div class="hero-line"></div>
+      <p>a simple blog about architecture and strange buildings</p>
     </section>
 
     <section class="posts" id="posts">
@@ -499,17 +463,6 @@
       <div class="about-grid">
         <div class="about-left">
           <p>hi, i'm semih. i write about architecture in a simple way.</p>
-        </div>
-
-        <div class="about-right">
-          <div class="newsletter-box">
-            <div class="label">Newsletter</div>
-            <p>get new posts and small architecture notes by email.</p>
-            <form class="newsletter-form">
-              <input type="email" placeholder="your email" aria-label="Email address">
-              <button type="submit">Join</button>
-            </form>
-          </div>
 
           <div class="social">
             <a href="https://instagram.com/semihhhfz" target="_blank" rel="noopener noreferrer">
@@ -519,6 +472,15 @@
               <img src="youtubeicon.PNG" alt="YouTube">
             </a>
           </div>
+        </div>
+
+        <div class="newsletter-box">
+          <div class="label">Newsletter</div>
+          <p>get new posts and small architecture notes by email.</p>
+          <form class="newsletter-form">
+            <input type="email" placeholder="your email" aria-label="Email address">
+            <button type="submit">Join</button>
+          </form>
         </div>
       </div>
     </section>
