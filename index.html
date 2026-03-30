@@ -4,11 +4,12 @@
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>struc</title>
-
 <link rel="icon" type="image/png" href="struc.png">
 
 <style>
-  * { box-sizing: border-box; }
+  * {
+    box-sizing: border-box;
+  }
 
   html, body {
     margin: 0;
@@ -103,7 +104,7 @@
   .hero {
     min-height: 100vh;
     display: grid;
-    grid-template-columns: 1.1fr 0.9fr;
+    grid-template-columns: 1.05fr 0.95fr;
     gap: 30px;
     align-items: center;
     padding: 120px 0 60px;
@@ -146,8 +147,6 @@
   .hero-visual {
     position: relative;
     min-height: 560px;
-    border: 1px solid #000;
-    background: #fff;
     overflow: hidden;
     animation: rise 0.85s ease both;
     animation-delay: 0.1s;
@@ -162,8 +161,8 @@
     background-position: center;
     background-size: cover;
     transform: scale(1.02);
-    opacity: 0.98;
-    filter: contrast(1.02) brightness(1.01);
+    opacity: 1;
+    filter: contrast(1.04) brightness(1.02);
   }
 
   .hero-visual::after {
@@ -171,22 +170,27 @@
     position: absolute;
     inset: 0;
     background:
-      linear-gradient(to right, rgba(255,255,255,0.92) 0%, rgba(255,255,255,0.08) 42%, rgba(255,255,255,0.18) 100%),
-      linear-gradient(to top, rgba(255,255,255,0.04), rgba(255,255,255,0.02));
+      linear-gradient(
+        90deg,
+        rgba(255,255,255,0.96) 0%,
+        rgba(255,255,255,0.72) 22%,
+        rgba(255,255,255,0.28) 50%,
+        rgba(255,255,255,0.56) 78%,
+        rgba(255,255,255,0.92) 100%
+      ),
+      linear-gradient(
+        180deg,
+        rgba(255,255,255,0.08),
+        rgba(255,255,255,0.18)
+      );
     pointer-events: none;
   }
 
-  .hero-tag {
+  .hero-visual .edge {
     position: absolute;
-    left: 18px;
-    bottom: 18px;
-    z-index: 2;
-    padding: 9px 11px;
-    border: 1px solid rgba(0,0,0,0.15);
-    background: rgba(255,255,255,0.82);
-    font-size: 11px;
-    letter-spacing: 1px;
-    text-transform: uppercase;
+    inset: 18px;
+    border: 1px solid rgba(0,0,0,0.12);
+    pointer-events: none;
   }
 
   /* POSTS */
@@ -251,8 +255,8 @@
 
   .about-grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+    grid-template-columns: 1.15fr 0.85fr;
+    gap: 32px;
     align-items: start;
   }
 
@@ -266,7 +270,7 @@
 
   .about-right {
     display: grid;
-    gap: 14px;
+    gap: 16px;
     align-content: start;
   }
 
@@ -298,11 +302,12 @@
   .newsletter-form input {
     flex: 1;
     border: 1px solid #000;
-    padding: 12px 12px;
+    padding: 12px;
     font: inherit;
     font-size: 14px;
     outline: none;
     background: #fff;
+    min-width: 0;
   }
 
   .newsletter-form input:focus {
@@ -332,7 +337,6 @@
     display: flex;
     gap: 16px;
     align-items: center;
-    margin-top: 8px;
   }
 
   .social a {
@@ -428,13 +432,6 @@
       font-size: 50px;
     }
 
-    .posts,
-    .about,
-    footer {
-      padding-left: 0;
-      padding-right: 0;
-    }
-
     .hero-visual {
       min-height: 320px;
     }
@@ -458,97 +455,93 @@
 </head>
 
 <body>
+  <div class="cursor" id="cursor"></div>
 
-<div class="cursor" id="cursor"></div>
+  <header>
+    <img src="struc.gif" class="logo-gif" alt="struc logo">
+    <nav>
+      <a href="#">Home</a>
+      <a href="#about">About</a>
+      <a href="#posts">Posts</a>
+    </nav>
+  </header>
 
-<header>
-  <img src="struc.gif" class="logo-gif" alt="struc logo">
-  <nav>
-    <a href="#">Home</a>
-    <a href="#about">About</a>
-    <a href="#posts">Posts</a>
-  </nav>
-</header>
-
-<main class="wrap">
-  <section class="hero">
-    <div class="hero-copy">
-      <h1>structure<br>and silence</h1>
-      <div class="hero-line"></div>
-      <p>a simple blog about architecture and strange buildings</p>
-    </div>
-
-    <div class="hero-visual" aria-hidden="true">
-      <div class="hero-tag">background layer</div>
-    </div>
-  </section>
-
-  <section class="posts" id="posts">
-    <h2 class="section-title">Latest Posts</h2>
-
-    <article class="post">
-      <h3>Brutalism: the most honest form of concrete</h3>
-      <p>is it cold or just real?</p>
-      <a href="post1.html">read article</a>
-    </article>
-
-    <article class="post">
-      <h3>Urban renewal and memory</h3>
-      <p>what happens when cities forget?</p>
-      <a href="#">coming soon</a>
-    </article>
-  </section>
-
-  <section class="about" id="about">
-    <div class="about-grid">
-      <div class="about-left">
-        <p>hi, i'm semih. i write about architecture in a simple way.</p>
+  <main class="wrap">
+    <section class="hero">
+      <div class="hero-copy">
+        <h1>structure<br>and silence</h1>
+        <div class="hero-line"></div>
+        <p>a simple blog about architecture and strange buildings</p>
       </div>
 
-      <div class="about-right">
-        <div class="newsletter-box">
-          <div class="label">Newsletter</div>
-          <p>get new posts and small architecture notes by email.</p>
-          <form class="newsletter-form">
-            <input type="email" placeholder="your email" aria-label="Email address">
-            <button type="submit">Join</button>
-          </form>
+      <div class="hero-visual" aria-hidden="true">
+        <div class="edge"></div>
+      </div>
+    </section>
+
+    <section class="posts" id="posts">
+      <h2 class="section-title">Latest Posts</h2>
+
+      <article class="post">
+        <h3>Brutalism: the most honest form of concrete</h3>
+        <p>is it cold or just real?</p>
+        <a href="post1.html">read article</a>
+      </article>
+
+      <article class="post">
+        <h3>Urban renewal and memory</h3>
+        <p>what happens when cities forget?</p>
+        <a href="#">coming soon</a>
+      </article>
+    </section>
+
+    <section class="about" id="about">
+      <div class="about-grid">
+        <div class="about-left">
+          <p>hi, i'm semih. i write about architecture in a simple way.</p>
         </div>
 
-        <div class="social">
-          <a href="https://instagram.com/semihhhfz" target="_blank" rel="noopener noreferrer">
-            <img src="instagramicon.PNG" alt="Instagram">
-          </a>
-          <a href="https://youtube.com/@semihsf" target="_blank" rel="noopener noreferrer">
-            <img src="youtubeicon.PNG" alt="YouTube">
-          </a>
+        <div class="about-right">
+          <div class="newsletter-box">
+            <div class="label">Newsletter</div>
+            <p>get new posts and small architecture notes by email.</p>
+            <form class="newsletter-form">
+              <input type="email" placeholder="your email" aria-label="Email address">
+              <button type="submit">Join</button>
+            </form>
+          </div>
+
+          <div class="social">
+            <a href="https://instagram.com/semihhhfz" target="_blank" rel="noopener noreferrer">
+              <img src="instagramicon.PNG" alt="Instagram">
+            </a>
+            <a href="https://youtube.com/@semihsf" target="_blank" rel="noopener noreferrer">
+              <img src="youtubeicon.PNG" alt="YouTube">
+            </a>
+          </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <footer>
-    struc
-  </footer>
-</main>
+    <footer>struc</footer>
+  </main>
 
-<script>
-  const cursor = document.getElementById("cursor");
-  const header = document.querySelector("header");
+  <script>
+    const cursor = document.getElementById("cursor");
+    const header = document.querySelector("header");
 
-  document.addEventListener("mousemove", (e) => {
-    cursor.style.left = e.clientX + "px";
-    cursor.style.top = e.clientY + "px";
+    document.addEventListener("mousemove", (e) => {
+      cursor.style.left = e.clientX + "px";
+      cursor.style.top = e.clientY + "px";
 
-    const headerRect = header.getBoundingClientRect();
-    const inHeader = e.clientY <= headerRect.bottom;
-    cursor.style.opacity = inHeader ? "0" : "1";
-  });
+      const headerRect = header.getBoundingClientRect();
+      const inHeader = e.clientY <= headerRect.bottom;
+      cursor.style.opacity = inHeader ? "0" : "1";
+    });
 
-  document.addEventListener("mouseleave", () => {
-    cursor.style.opacity = "0";
-  });
-</script>
-
+    document.addEventListener("mouseleave", () => {
+      cursor.style.opacity = "0";
+    });
+  </script>
 </body>
 </html>
